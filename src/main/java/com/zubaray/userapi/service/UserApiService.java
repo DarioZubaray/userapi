@@ -3,8 +3,11 @@ package com.zubaray.userapi.service;
 import com.zubaray.userapi.entity.UserApi;
 import com.zubaray.userapi.exception.UserApiNotFoundException;
 import com.zubaray.userapi.repository.UserApiRepository;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -12,14 +15,16 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 @Slf4j
+@Service
+@AllArgsConstructor
 public class UserApiService {
 
     private UserApiRepository userApiRepository;
 
-    public UserApiService(UserApiRepository userApiRepository) {
-        this.userApiRepository = userApiRepository;
+    public UserDetailsService userDetailsService() {
+        return username -> userApiRepository.findByNameAndActiveTrue(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     public UserApi getUserApiById(Long id) {
@@ -50,7 +55,6 @@ public class UserApiService {
     public UserApi updateUserApi(Long id, UserApi userApi) {
         log.debug("updateUserApi: {}, {}", id, userApi);
         var userDB = userApiRepository.findByIdAndActive(id, true).orElseThrow(UserApiNotFoundException::new);
-        // solo se puede actualizar el email, password o los telefonos
         if (StringUtils.hasText(userApi.getEmail())) {
             userDB.setEmail(userApi.getEmail());
         }

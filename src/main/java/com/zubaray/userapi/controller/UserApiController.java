@@ -32,7 +32,7 @@ public class UserApiController {
         this.userApiService = userApiService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<?> getUserApiById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(userApiService.getUserApiById(id));
@@ -42,7 +42,7 @@ public class UserApiController {
         }
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/all")
     public ResponseEntity<List<UserApi>> getAllUserApi() {
         return ResponseEntity.ok(userApiService.getAllUserApi());
     }
@@ -53,7 +53,7 @@ public class UserApiController {
         return ResponseEntity.created(getLocation(userSaved)).body(userApi);
     }
 
-    @PutMapping("/put/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> putUserApi(@PathVariable Long id, @Valid @RequestBody UserApi userApi) {
         try {
             UserApi userSaved = userApiService.putUserApi(id, userApi);
@@ -64,7 +64,7 @@ public class UserApiController {
         }
     }
 
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/edit/{id}")
     public ResponseEntity<?> updateUserApi(@PathVariable Long id, @RequestBody UserApi userApi) {
         try {
             UserApi userSaved = userApiService.updateUserApi(id, userApi);
@@ -84,7 +84,7 @@ public class UserApiController {
     private URI getLocation(UserApi userApi) {
         return ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{id}")
+                .path("/id/{id}")
                 .buildAndExpand(userApi.getId())
                 .toUri();
     }
