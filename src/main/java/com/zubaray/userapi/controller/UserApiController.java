@@ -4,6 +4,13 @@ import com.zubaray.userapi.dto.ResponseDto;
 import com.zubaray.userapi.entity.UserApi;
 import com.zubaray.userapi.exception.UserApiNotFoundException;
 import com.zubaray.userapi.service.UserApiService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +31,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
+@Tag(name = "Users API")
 public class UserApiController {
 
     private UserApiService userApiService;
@@ -32,8 +40,24 @@ public class UserApiController {
         this.userApiService = userApiService;
     }
 
+    @Operation(summary = "Get a user by id", description = "Returns a user as per the id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Successfully retrieved",
+                    content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = UserApi.class))
+                    }),
+            @ApiResponse(responseCode = "404",
+                    description = "Not found - The product was not found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseDto.class))
+                    })
+    })
     @GetMapping("/id/{id}")
-    public ResponseEntity<?> getUserApiById(@PathVariable Long id) {
+    public ResponseEntity<?> getUserApiById(
+            @PathVariable
+            @Parameter(name = "id", description = "User id", example = "1")
+                    Long id) {
         try {
             return ResponseEntity.ok(userApiService.getUserApiById(id));
         } catch(UserApiNotFoundException e) {
@@ -42,6 +66,14 @@ public class UserApiController {
         }
     }
 
+    @Operation(summary = "Get all users", description = "Returns a list of users")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Successfully retrieved",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserApi.class))
+                    })
+    })
     @GetMapping("/all")
     public ResponseEntity<List<UserApi>> getAllUserApi() {
         return ResponseEntity.ok(userApiService.getAllUserApi());

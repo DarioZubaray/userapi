@@ -7,6 +7,7 @@ import com.zubaray.userapi.entity.JwtResponse;
 import com.zubaray.userapi.entity.UserApi;
 import com.zubaray.userapi.exception.UserApiNotFoundException;
 import com.zubaray.userapi.repository.UserApiRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @CrossOrigin
+@Tag(name = "Authentication")
 public class JwtAuthenticationController {
 
     @Autowired

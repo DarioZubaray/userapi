@@ -37,7 +37,7 @@ for windows:
 ```
 mvnw.cmd spring-boot:run
 ```
-for linux o mac:
+for linux or mac:
 ```
 ./mvnw spring-boot:run
 ```
@@ -50,11 +50,11 @@ Database name, user and password can be found in application properties
 	http://localhost:8080/h2-console
 ```
 
-| credentials           |           |
-| --------------------- | --------- |
+| credentials           |                    |
+| --------------------- | ------------------ |
 | url datasource        | jdbc:h2:mem:testdb |
-| username              | sa               |
-| password              | -empty password- |
+| username              | sa                 |
+| password              | -empty password-   |
 
 
 ### Swagger
