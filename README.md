@@ -70,3 +70,18 @@ swagger user interface can be found at:
 
 A postman collection as a [json file](UserApi.postman_collection.json)  can be found in the root of the project, just need to be imported and that's it!
 
+
+### Docker
+
+Assuming you've already intalled docker on your computer or [donwload here](https://www.docker.com/products/docker-desktop/), you only need to create the image and then run the container
+
+_From workspace path:_
+```
+	docker build . -t user-api-image
+```
+
+```
+	docker run -p 8089:8080 -i --name user_api_container user-api-image
+```
+
+> The exposed port was changed for exercise purposes.
