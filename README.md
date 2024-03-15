@@ -61,18 +61,30 @@ you can change it in the command line bootstrap like this:
 
 Database name, user and password can be found in application properties: dev
 
-```
-	http://localhost:8080/h2-console
-```
-
 | credentials           |                    |
 | --------------------- | ------------------ |
 | url datasource        | jdbc:h2:mem:testdb |
 | username              | sa                 |
 | password              | -empty password-   |
 
+User interface
+
+```
+	http://localhost:8080/h2-console
+```
+
 
 ### PgAdmin
+
+PgAdmin is a user interface to easily see your table. To download follow this [link](https://www.pgadmin.org/download/)
+
+To create a Postgres engine with docker, you need to pull the latest postgres image and run it with a couple of parameters:
+
+```
+	docker pull postgres
+	
+	docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
+```
 
 Database name, user and password can be found in application properties: test
 
