@@ -23,6 +23,7 @@ Spring-boot project created with [spring initializr](https://start.spring.io/)
 | spring security       | 2.3.2     |
 | spring security test  | 2.3.2     |
 | H2 Database           | 2.2.224   |
+| Postgresql            | 42.6.1    |
 | Lombok                | 1.18.30   |
 | jbcrypt               | 0.4       |
 | jjwt api              | 0.11.5    |
@@ -42,9 +43,22 @@ for linux or mac:
 ./mvnw spring-boot:run
 ```
 
+### Profiles
+
+The application have 2 profiles
+
+- dev: uses h2 in memory, DEBUG log level
+- test: uses postgresql database, INFO log level
+
+> by default the profile is set to _test_
+
+```
+	http://localhost:8080/h2-console
+```
+
 ### H2 console
 
-Database name, user and password can be found in application properties
+Database name, user and password can be found in application properties: dev
 
 ```
 	http://localhost:8080/h2-console
@@ -56,6 +70,16 @@ Database name, user and password can be found in application properties
 | username              | sa                 |
 | password              | -empty password-   |
 
+
+### PgAdmin
+
+Database name, user and password can be found in application properties: test
+
+| credentials           |                    |
+| --------------------- | ------------------ |
+| url datasource        | jdbc:postgresql://localhost:5432/mydb |
+| username              | postgres           |
+| password              | mysecretpassword   |
 
 ### Swagger
 
