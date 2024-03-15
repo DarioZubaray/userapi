@@ -32,7 +32,8 @@ Spring-boot project created with [spring initializr](https://start.spring.io/)
 | jjwt jackson          | 0.11.5    |
 | mockito core          | 3.12.4    |
 
-### Run
+## Executions
+### Simple run
 
 To run the application we can use the maven wrapped provided in the springboot project like this:
 
@@ -46,7 +47,7 @@ for linux or mac:
 ./mvnw spring-boot:run
 ```
 
-### Profiles
+### Using profiles
 
 The application have 2 profiles
 
@@ -61,6 +62,7 @@ _From workspace path:_
 	mvn spring-boot:run -Dspring.profiles.active=dev
 ```
 
+## Database monitoring
 ### H2 console
 
 Database name, user and password can be found in application properties: dev
@@ -77,18 +79,8 @@ User interface
 	http://localhost:8080/h2-console
 ```
 
+### PgAdmin
 
-### Postgresql on Docker and PgAdmin
-
-To create a Postgres engine with docker, you need to pull the latest postgres image and run it with a couple of parameters:
-
-```
-	docker pull postgres
-```
-
-```
-	docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
-```
 PgAdmin is a user interface to easily see your table. To download follow this [link](https://www.pgadmin.org/download/)
 
 Database name, user and password can be found in application properties: test
@@ -99,6 +91,7 @@ Database name, user and password can be found in application properties: test
 | username              | postgres           |
 | password              | mysecretpassword   |
 
+## Web API Testing
 ### Swagger
 
 swagger user interface can be found at:
@@ -107,15 +100,14 @@ swagger user interface can be found at:
 	http://localhost:8080/swagger-ui/index.html
 ```
 
-
 ### Postman
 
 A postman collection as a [json file](UserApi.postman_collection.json)  can be found in the root of the project, just need to be imported and that's it!
 
-
+## Containers
 ### Docker
 
-Assuming you've already intalled docker on your computer or [donwload here](https://www.docker.com/products/docker-desktop/), you only need to create the image and then run the container
+Assuming you've already installed docker on your computer or [donwload here](https://www.docker.com/products/docker-desktop/), you only need to create the image and then run the container
 
 _From workspace path:_
 ```
@@ -127,6 +119,18 @@ _From workspace path:_
 ```
 
 > The exposed port was changed for exercise purposes.
+
+### PostgreSQL in a container
+
+To create a Postgres engine with docker, you need to pull the latest postgres image and run it with a couple of parameters:
+
+```
+	docker pull postgres
+```
+
+```
+	docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
+```
 
 ### Docker Compose
 
