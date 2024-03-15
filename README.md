@@ -1,6 +1,7 @@
 # User API
 
 Spring-boot project created with [spring initializr](https://start.spring.io/)
+
 #### specifications:
 
 | Type          | Description   |
@@ -32,8 +33,10 @@ Spring-boot project created with [spring initializr](https://start.spring.io/)
 | mockito core          | 3.12.4    |
 
 ### Run
-From the root path of the project
 
+To run the application we can use the maven wrapped provided in the springboot project like this:
+
+_From workspace path:_
 for windows:
 ```
 mvnw.cmd spring-boot:run
@@ -53,8 +56,9 @@ The application have 2 profiles
 > by default the profile is set to _test_
 
 you can change it in the command line bootstrap like this:
+_From workspace path:_
 ```
-	mvn spring-boot:run -Dspring.profiles.active=prod
+	mvn spring-boot:run -Dspring.profiles.active=dev
 ```
 
 ### H2 console
@@ -74,17 +78,18 @@ User interface
 ```
 
 
-### PgAdmin
-
-PgAdmin is a user interface to easily see your table. To download follow this [link](https://www.pgadmin.org/download/)
+### Postgresql on Docker and PgAdmin
 
 To create a Postgres engine with docker, you need to pull the latest postgres image and run it with a couple of parameters:
 
 ```
 	docker pull postgres
-	
+```
+
+```
 	docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
 ```
+PgAdmin is a user interface to easily see your table. To download follow this [link](https://www.pgadmin.org/download/)
 
 Database name, user and password can be found in application properties: test
 
@@ -122,3 +127,12 @@ _From workspace path:_
 ```
 
 > The exposed port was changed for exercise purposes.
+
+### Docker Compose
+
+In order to simplify the creation of the app and its database we can use Docker Compose which is a tool for defining and running multi-container applications
+
+_From workspace path:_
+```
+    docker-compose up --build
+```
