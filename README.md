@@ -52,8 +52,9 @@ The application have 2 profiles
 
 > by default the profile is set to _test_
 
+you can change it in the command line bootstrap like this:
 ```
-	http://localhost:8080/h2-console
+	mvn spring-boot:run -Dspring.profiles.active=prod
 ```
 
 ### H2 console
